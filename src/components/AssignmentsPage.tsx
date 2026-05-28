@@ -41,25 +41,11 @@ export default function AssignmentsPage({ user, assignments, setAssignments, gen
   const [errors, setErrors] = useState<Record<string, string>>({})
   const fileRef = useRef<HTMLInputElement>(null)
   const paperRef = useRef<HTMLDivElement>(null)
-  const socketRef = useRef<Socket | null>(null)
+  
 
   const { setWsConnected } = useAppStore()
 
   // Init WebSocket
-  useEffect(() => {
-    fetch('/api/socket').finally(() => {
-      const socket = io({ path: '/api/socket', addTrailingSlash: false })
-      socketRef.current = socket
-      socket.on('connect', () => setWsConnected(true))
-      socket.on('disconnect', () => setWsConnected(false))
-      socket.on('generation:progress', ({ step, message }: { step: number; message: string }) => {
-        setWsStep(step)
-        setWsMsg(message)
-        setLs(Math.min(step, STEPS.length - 1))
-      })
-    })
-    return () => { socketRef.current?.disconnect() }
-  }, [])
 
   const totalQ = form.questionTypes.reduce((s, qt) => s + Number(qt.count), 0)
   const totalM = form.questionTypes.reduce((s, qt) => s + Number(qt.count) * Number(qt.marks), 0)
