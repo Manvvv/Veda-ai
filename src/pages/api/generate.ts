@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { IncomingForm, Fields, Files } from 'formidable'
 import fs from 'fs'
 import Groq from 'groq-sdk'
-import { PDFParse } from 'pdf-parse'
+import pdfParse from 'pdf-parse'
 
 export const config = { api: { bodyParser: false } }
 
@@ -66,7 +66,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const fname = (fileObj.originalFilename || '').toLowerCase()
       if (fname.endsWith('.pdf')) {
         try {
-          const pdfData = await new PDFParse(fileBuffer).parse()
+       const pdfData = await pdfParse(fileBuffer)
           referenceText = pdfData.text.trim().slice(0, 7000)
         } catch (e) {
           console.warn('PDF parse error:', e)
