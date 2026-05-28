@@ -26,6 +26,7 @@
     "zustand": "^4.5.2"
   },
   "devDependencies": {
+    "@types/formidable": "^3.5.1",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
