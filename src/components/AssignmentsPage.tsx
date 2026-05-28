@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { io, Socket } from 'socket.io-client'
+
 import { C, QUESTION_TYPES, LOADING_STEPS } from '@/utils/constants'
 import { User, Assignment, GeneratedPaper, AssignmentForm } from '@/utils/types'
 import { TopBar, DiffBadge } from './UI'
