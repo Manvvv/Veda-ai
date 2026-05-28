@@ -1,151 +1,242 @@
 # VedaAI – AI Assessment Creator
 
-An AI-powered assessment platform for educators. Built with Next.js, TypeScript, Zustand, and Anthropic Claude.
+An AI-powered assessment platform for educators. Built with Next.js, TypeScript, Zustand, and Groq AI.
 
 ---
 
 ## 🚀 Features
 
-- **Login / Signup** — Full auth flow with validation
-- **Home Dashboard** — Stats, recent activity, quick tools
-- **My Groups** — Create and manage student groups
-- **Assignments** — Create assignments, generate AI question papers, view structured output
-- **AI Teacher's Toolkit** — 6 AI-powered tools (Question Generator, Auto Grader, Rubric Builder, etc.)
-- **My Library** — Upload, search, and manage reference documents
-- **Settings** — Profile editing, notifications, security, appearance
+* **Login / Signup** — Full authentication flow with validation
+* **Home Dashboard** — Stats, recent activity, quick tools
+* **My Groups** — Create and manage student groups
+* **Assignments** — Generate AI-powered question papers
+* **AI Teacher's Toolkit** — Smart AI tools for teachers
+* **My Library** — Upload and manage study materials
+* **Settings** — Full profile, theme, and appearance settings
+* **Dark Mode** — Global light/dark theme system
+* **Accent Colors** — Dynamic global accent color switching
+
+---
+
+# 🧠 AI Powered by Groq
+
+VedaAI now uses Groq API with ultra-fast inference.
+
+### Supported Models
+
+* `llama-3.3-70b-versatile`
+* `llama-3.1-8b-instant`
 
 ---
 
 ## 🛠 Tech Stack
 
-| Layer | Technology |
-|-------|------------|
-| Frontend | Next.js 14 + TypeScript |
-| State Management | Zustand |
-| AI | Anthropic Claude (claude-sonnet-4-20250514) |
-| Styling | Inline styles + Tailwind CSS |
-| API Routes | Next.js API Routes |
+| Layer            | Technology                             |
+| ---------------- | -------------------------------------- |
+| Frontend         | Next.js 14 + TypeScript                |
+| State Management | Zustand                                |
+| AI Provider      | Groq API                               |
+| AI Models        | Llama 3.3 / Llama 3.1                  |
+| Styling          | Inline styles + Global Theme Variables |
+| API Routes       | Next.js API Routes                     |
+| Realtime         | Socket.io                              |
 
 ---
 
-## ⚙️ Setup Instructions
+# ⚙️ Setup Instructions
 
-### 1. Clone & Install
+## 1. Clone Repository
 
 ```bash
-git clone <your-repo-url>
-cd vedaai
+git clone https://github.com/Manvvv/Veda-ai.git
+cd Veda-ai
+```
+
+---
+
+## 2. Install Dependencies
+
+```bash
 npm install
 ```
 
-### 2. Environment Variables
+---
 
-Copy the example env file and add your Anthropic API key:
+## 3. Install Groq SDK
 
 ```bash
-cp .env.local.example .env.local
+npm install groq-sdk
 ```
 
-Edit `.env.local`:
-```
-ANTHROPIC_API_KEY=your_anthropic_api_key_here
+---
+
+## 4. Create Environment File
+
+Create:
+
+```bash
+.env.local
 ```
 
-Get your API key from: https://console.anthropic.com
+Add:
 
-### 3. Run Development Server
+```env
+GROQ_API_KEY=your_groq_api_key_here
+```
+
+Get your API key from:
+
+https://console.groq.com/keys
+
+---
+
+## 5. Start Development Server
 
 ```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000)
+Open:
 
-### 4. Build for Production
+```txt
+http://localhost:3000
+```
+
+---
+
+# 📁 Project Structure
+
+```txt
+Veda-ai/
+├── src/
+│   ├── components/
+│   │   ├── UI.tsx
+│   │   ├── Sidebar.tsx
+│   │   ├── LoginPage.tsx
+│   │   ├── HomePage.tsx
+│   │   ├── GroupsPage.tsx
+│   │   ├── AssignmentsPage.tsx
+│   │   ├── ToolkitPage.tsx
+│   │   ├── LibraryPage.tsx
+│   │   └── SettingsPage.tsx
+│   │
+│   ├── pages/
+│   │   ├── _app.tsx
+│   │   ├── index.tsx
+│   │   └── api/
+│   │       ├── generate.ts
+│   │       └── toolkit.ts
+│   │
+│   ├── store/
+│   │   └── useAppStore.ts
+│   │
+│   ├── utils/
+│   │   ├── api.ts
+│   │   ├── constants.ts
+│   │   └── types.ts
+│   │
+│   └── styles/
+│       └── globals.css
+│
+├── public/
+├── .env.local
+├── next.config.js
+├── tsconfig.json
+├── package.json
+└── README.md
+```
+
+---
+
+# 🔑 API Routes
+
+## POST `/api/generate`
+
+Generates structured AI question papers.
+
+### Request
+
+```json
+{
+  "prompt": "Generate a Class 8 Science paper"
+}
+```
+
+### Response
+
+```json
+{
+  "paper": {}
+}
+```
+
+---
+
+## POST `/api/toolkit`
+
+Runs AI teacher tools.
+
+### Request
+
+```json
+{
+  "toolTitle": "Question Generator",
+  "input": "Generate MCQs on Photosynthesis"
+}
+```
+
+---
+
+# 🎨 Theme System
+
+VedaAI includes a complete global theme engine:
+
+* 🌞 Light Mode
+* 🌙 Dark Mode
+* 🎨 Dynamic Accent Colors
+* ⚡ Real-time Theme Switching
+
+Theme colors are powered using CSS variables.
+
+---
+
+# ⚡ Performance
+
+Groq inference provides:
+
+* Extremely fast responses
+* Low latency AI generation
+* Better real-time UX
+* Scalable AI architecture
+
+---
+
+# 🔒 Security
+
+* API keys stored securely in `.env.local`
+* No API key exposure on frontend
+* All AI requests handled via secure Next.js API routes
+
+---
+
+# 🚀 Deployment
+
+Build production app:
 
 ```bash
 npm run build
 npm start
 ```
 
----
+Deploy easily on:
 
-## 📁 Project Structure
-
-```
-vedaai/
-├── src/
-│   ├── components/
-│   │   ├── UI.tsx              # Shared UI components (Avatar, Badge, TopBar, etc.)
-│   │   ├── Sidebar.tsx         # Navigation sidebar
-│   │   ├── LoginPage.tsx       # Login & Signup
-│   │   ├── HomePage.tsx        # Dashboard home
-│   │   ├── GroupsPage.tsx      # Student groups management
-│   │   ├── AssignmentsPage.tsx # Assignment creation & AI generation
-│   │   ├── ToolkitPage.tsx     # AI Teacher's Toolkit
-│   │   ├── LibraryPage.tsx     # File library
-│   │   └── SettingsPage.tsx    # User settings
-│   ├── pages/
-│   │   ├── _app.tsx            # Next.js App wrapper
-│   │   ├── index.tsx           # Main entry point
-│   │   └── api/
-│   │       ├── generate.ts     # AI paper generation endpoint
-│   │       └── toolkit.ts      # AI toolkit endpoint
-│   ├── store/
-│   │   └── useAppStore.ts      # Zustand global state
-│   ├── utils/
-│   │   ├── api.ts              # API helper functions
-│   │   ├── constants.ts        # Colors, mock data, constants
-│   │   └── types.ts            # TypeScript interfaces
-│   └── styles/
-│       └── globals.css         # Global styles & animations
-├── public/
-├── .env.local.example
-├── next.config.js
-├── tsconfig.json
-├── tailwind.config.ts
-└── package.json
-```
+* Vercel
+* Netlify
+* Railway
+* Render
 
 ---
 
-## 🔑 API Routes
+# 🧑‍💻 Author
 
-### `POST /api/generate`
-Generates a structured question paper using Claude AI.
-
-**Body:** `{ prompt: string }`  
-**Response:** `{ paper: GeneratedPaper }`
-
-### `POST /api/toolkit`
-Runs an AI Teacher's Toolkit tool.
-
-**Body:** `{ toolTitle: string, input: string }`  
-**Response:** `{ result: string }`
-
----
-
-## 🏗 Architecture
-
-```
-User Action → Zustand Store → Next.js API Route → Anthropic Claude API
-                   ↓
-            React Component re-render
-```
-
-The frontend never exposes the API key — all Anthropic calls go through Next.js API routes on the server side.
-
----
-
-## 📦 Bonus Features
-
-- PDF Download button (hookup jspdf for full implementation)
-- WebSocket-ready architecture (socket.io-client included)
-- BullMQ background job queue ready (add Redis + BullMQ for production)
-- MongoDB connection ready (add mongoose for database persistence)
-
----
-
-## 🧑‍💻 Author
-
-Built for VedaAI internship assessment.
+Built by Manav Choudhary for the VedaAI project.
