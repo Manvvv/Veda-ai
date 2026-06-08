@@ -1,4 +1,4 @@
-# VedaAI – AI Assessment Creator
+# VedaAI – AI Assessment Creator.
 
 An AI-powered assessment platform for educators. Built with Next.js, TypeScript, Zustand, and Groq AI.
 
